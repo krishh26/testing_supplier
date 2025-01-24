@@ -113,6 +113,7 @@ export class ProjectsShortlistedComponent implements OnInit {
     this.payload.limit = String(this.pagesize);
     this.payload.applied = false;
     this.payload.sortlist = true;
+    this.payload.status = 'Passed';
     //  // this.payload.match = 'partial';
     this.projectService.getProjectList(this.payload).subscribe((response) => {
       this.projectList = [];
