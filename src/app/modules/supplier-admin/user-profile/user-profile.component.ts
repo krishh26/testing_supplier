@@ -103,7 +103,8 @@ export class UserProfileComponent implements OnInit {
     employeeCount: new FormControl(""),
     typeOfCompany: new FormControl(""),
     website: new FormControl(""),
-    technologyStack: new FormControl(""),
+    yearOfEstablishment: new FormControl(""),
+    companyDirectors_Owners:new FormControl(""),
   };
 
   userForm = new FormGroup(this.userDataForm, []);
@@ -135,7 +136,8 @@ export class UserProfileComponent implements OnInit {
         this.userForm.controls['employeeCount'].setValue(response?.data?.employeeCount || "");
         this.userForm.controls['typeOfCompany'].setValue(response?.data?.typeOfCompany || "");
         this.userForm.controls['website'].setValue(response?.data?.website || "");
-        this.userForm.controls['website'].setValue(response?.data?.technologyStack || "");
+        this.userForm.controls['yearOfEstablishment'].setValue(response?.data?.yearOfEstablishment || "");
+        this.userForm.controls['companyDirectors_Owners'].setValue(response?.data?.companyDirectors_Owners || "");
       }
     }, (error) => {
       this.notificationService.showError(error?.error?.message || 'Error');
