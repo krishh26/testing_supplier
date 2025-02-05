@@ -34,6 +34,7 @@ export class SupplierProjectWorkInProgressComponent {
   selectedProjectTypes: any[] = [];
   selectedClientTypes: any[] = [];
   selectedStatuses: any[] = [];
+  selectedBidStatuses: any[] = [];
 
   projectTypeList = [
     { projectType: 'Development', value: 'Development' },
@@ -48,12 +49,6 @@ export class SupplierProjectWorkInProgressComponent {
 
   isExpired: boolean = false;
   statusList = [
-    // { value: 'Awaiting', status: 'Awaiting' },
-    // { value: 'InProgress', status: 'In-Progress' },
-    // { value: 'InHold', status: 'In Hold' },
-    // { value: 'Passed', status: 'Pass' },
-    // { value: 'Fail', status: 'Fail' },
-
     { value: 'In solution', supplierStatus: 'In solution' },
     { value: 'In-review', supplierStatus: 'In-review' },
     { value: 'In-Submission', supplierStatus: 'In-Submission' },
@@ -61,8 +56,19 @@ export class SupplierProjectWorkInProgressComponent {
     { value: 'Awarded', supplierStatus: 'Awarded' },
     { value: 'Not awarded', supplierStatus: 'Not awarded' },
     { value: 'Dropped', supplierStatus: 'Dropped' }
-
   ];
+
+  bidstatusList = [
+    // { bidvalue: 'Awaiting', bidstatus: 'Awaiting' },
+    { bidvalue: 'InSolution', bidstatus: 'In Soulution' },
+    { bidvalue: 'NotAwarded', bidstatus: 'Not Awarded' },
+    { bidvalue: 'Awarded', bidstatus: 'Awarded' },
+    // { bidvalue: 'DroppedAfterFeasibility', bidstatus: 'Dropped after feasibility' },
+    { bidvalue: 'WaitingForResult', bidstatus: 'Waiting For Result' },
+    // { bidvalue: 'Nosuppliermatched', bidstatus: 'No Supplier Matched' }
+  ]
+
+
   categoryList: any = [];
   industryList: any = [];
   myControl = new FormControl();
@@ -117,18 +123,16 @@ export class SupplierProjectWorkInProgressComponent {
 
   searchtext() {
     this.showLoader = true;
-    // Update payload with filters
     this.payload.keyword = this.searchText;
     this.payload.page = String(this.page);
     this.payload.limit = String(this.pagesize);
-    this.payload.category = this.selectedCategories.join(',');
-    this.payload.industry = this.selectedIndustries.join(',');
-    this.payload.projectType = this.selectedProjectTypes.join(',');
-    this.payload.clientType = this.selectedClientTypes.join(',');
-    this.payload.status = this.selectedStatuses.join(',');
-    this.payload.supplierStatus = this.selectedStatuses.join(',');
-    this.payload.workInProgress = true;
-    this.payload.match = "partial";
+    // this.payload.category = this.selectedCategories.join(',');
+    // this.payload.industry = this.selectedIndustries.join(',');
+    // this.payload.projectType = this.selectedProjectTypes.join(',');
+    // this.payload.clientType = this.selectedClientTypes.join(',');
+    // this.payload.supplierStatus = this.selectedStatuses.join(',');
+    //this.payload.status = 'Passed';
+    this.payload.bidManagerStatus = this.selectedBidStatuses.join(',')
     this.payload.publishDateRange = (this.publishStartDate.value && this.publishEndDate.value) ? `${this.publishStartDate.value.year}-${this.publishStartDate.value.month}-${this.publishStartDate.value.day} , ${this.publishEndDate.value.year}-${this.publishEndDate.value.month}-${this.publishEndDate.value.day}` : '';
     this.payload.SubmissionDueDateRange = (this.submissionStartDate.value && this.submissionEndDate.value) ? `${this.submissionStartDate.value.year}-${this.submissionStartDate.value.month}-${this.submissionStartDate.value.day} , ${this.submissionEndDate.value.year}-${this.submissionEndDate.value.month}-${this.submissionEndDate.value.day}` : '';
     this.payload.valueRange = this.minValue + '-' + this.maxValue;
