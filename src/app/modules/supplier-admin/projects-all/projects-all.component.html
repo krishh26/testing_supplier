@@ -178,12 +178,12 @@
                   <!-- <td>{{item?.projectType}}</td> -->
                   <!-- <td>{{item?.supplierStatus}}</td> -->
                   <td>{{item?.dueDate | date:'dd/MM/yyyy, h:mm a'}}</td>
-                  <td>
+                  <!-- <td>
                     <a *ngIf="isUserShortlisted(item?.sortListUserId)" style="background-color: darkgray;"
                       class="btn btn-sm btn-dark m-1" title="Shortlist">Shortlisted</a>
                     <a *ngIf="!isUserShortlisted(item?.sortListUserId)" (click)="sortListProject(item?._id)"
                       class="btn btn-sm btn-dark m-1" title="Shortlist">Shortlist</a>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
