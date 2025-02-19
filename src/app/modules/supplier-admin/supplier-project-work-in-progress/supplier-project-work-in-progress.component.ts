@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ProjectService } from 'src/app/services/project-service/project.service';
 import { SuperadminService } from 'src/app/services/super-admin/superadmin.service';
@@ -21,7 +22,7 @@ export class SupplierProjectWorkInProgressComponent {
   pagesize = pagination.itemsPerPage;
   totalRecords: number = pagination.totalRecords;
   searchText: any;
-
+  loginUser: any;
   minValue: number = 0;
   maxValue: number = 50000000;
   options: Options = {
@@ -83,8 +84,11 @@ export class SupplierProjectWorkInProgressComponent {
     private projectService: ProjectService,
     private notificationService: NotificationService,
     private router: Router,
-    private superService: SuperadminService
-  ) { }
+    private superService: SuperadminService,
+    private localStorageService: LocalStorageService,
+  ) { 
+    this.loginUser = this.localStorageService.getLogger();
+   }
 
   ngOnInit(): void {
     this.payload = this.superService.deepCopy(Payload.projectList);
@@ -211,6 +215,7 @@ export class SupplierProjectWorkInProgressComponent {
     this.payload.sortlist = false;
     // this.payload.workInProgress = true;
     // this.payload.match = "partial";
+    this.payload.supplierId = this.loginUser?._id
     this.payload.bidManagerStatus = "InSolution,WaitingForResult";
     this.projectService.getProjectList(this.payload).subscribe((response) => {
       this.projectList = [];
